@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title></title>
+	<style type="text/css">
+		html,body,ul{
+			width: 100%;
+			height: 100%;
+		}
+		ul,body {
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			width: 100%;
+			height: 200px;
+			border-bottom: 1px solid #000;
+			background-color: #ccc;
+			list-style: none;
+			text-align: center;
+			line-height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>click</li>
+		<li>touchstart</li>
+		<li>tap模拟click</li>
+	</ul>
+</body>
+<script src="tap.js"></script>
+<script type="text/javascript">
+	(function(){
+		var aLis = document.getElementsByTagName("li");
+		var startTime,endTime;
+		aLis[0].onclick = function(){
+			startTime = new Date().getTime();
+			this.style.backgroundColor = "rgb(151,180,180)";
+			endTime = new Date().getTime();
+			this.innerHTML = endTime-startTime;
+			// alert(getStyle(aLis[0],'backgroundColor'));
+			// if(getStyle(aLis[0],'backgroundColor')=="rgb(151,180,180)"){
+			// 	alert(1);
+			// }
+		}
+		aLis[1].ontouchstart = function(){
+			startTime = new Date().getTime();
+			this.style.backgroundColor = "rgb(151,180,180)";
+			endTime = new Date().getTime();
+			this.innerHTML = endTime-startTime;
+		}
+		TouchSim(aLis[2]).tap(function(e){
+			startTime = new Date().getTime();
+			this.style.backgroundColor = "rgb(151,180,180)";
+			endTime = new Date().getTime();
+			this.innerHTML = endTime-startTime;
+		})
+		function getStyle(obj,attr){
+			return getComputedStyle?getComputedStyle(obj)[attr]:obj.currentStyle[attr];
+		}
+	})();
+
+</script>
+</html>
